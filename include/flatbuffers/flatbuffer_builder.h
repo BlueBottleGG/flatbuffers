@@ -594,6 +594,9 @@ template<bool Is64Aware = false> class FlatBufferBuilderImpl {
   /// If a string with this exact contents has already been serialized before,
   /// instead simply returns the offset of the existing string. This uses a map
   /// stored on the heap, but only stores the numerical offsets.
+  /// ATTENTION: The implementation does not use a cryptographic hash function.
+  /// DO NOT use it for large amounts of user-sourced input or your program may
+  /// become vulnerable to HashDoS attacks.
   /// @param[in] str A const char pointer to the data to be stored as a string.
   /// @param[in] len The number of bytes that should be stored from `str`.
   /// @return Returns the offset in the buffer where the string starts.
